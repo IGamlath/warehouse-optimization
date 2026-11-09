@@ -1,0 +1,30 @@
+# Python virtual environment
+.venv/
+venv/
+
+# Python / Jupyter artifacts
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Secrets and credentials
+.env
+*.env
+credentials*
+secrets*
+
+# Datasets (too large for Git; picks.csv alone is ~143 MB).
+# Keep folder placeholders and small source documentation.
+data/raw/**
+!data/raw/**/
+!data/raw/**/README_source.html
+data/processed/*
+!data/processed/.gitkeep
+!data/**/.gitkeep
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+.vscode/
+.idea/

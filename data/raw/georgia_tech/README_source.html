@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Home page of Warehouse Science, a site devoted to mathematical and computer models of warehousing, distribution, and logistics
+">
+
+	<link rel="icon" href="./assets/favicon.ico">
+
+    <title>Warehouse Science</title>
+
+  <style>
+      /* Only necessary if you are using navbar-fixed-top */
+      body {
+      	padding-top: 70px;
+      }
+      footer {
+      	text-align: right;
+      }
+  </style>
+
+<!-- 	Alternative stylings: -->
+<!--     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"> -->
+<!--     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/cosmo/bootstrap.min.css" rel="stylesheet"> -->
+<!--     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/journal/bootstrap.min.css" rel="stylesheet"> -->
+<!--     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/readable/bootstrap.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	
+	<script type="text/javascript"
+  		src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+	</script>
+</head>
+
+
+  <body>
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://www.warehouse-science.com">Warehouse Science</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="http://www.warehouse-science.com"><span class="fa fa-home"></span>&nbsp; Home</a></li>
+			<li><a href="http://www.warehouse-science.com/book/index.html"><span class="fa fa-book"></span>&nbsp; Book</a></li>
+			<li><a href="http://www.warehouse-science.com/apps/index.html"><span class="fa fa-wrench"></span>&nbsp; Software</a></li>
+			<li><a href="http://www.warehouse-science.com/classes/index.html"><span class="fa fa-university"></span>&nbsp; Classes</a></li>
+            <li><a href="http://www.warehouse-science.com/about/index.html">About</a></li>
+            <li><a href="http://www.warehouse-science.com/contact/index.html">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+    <div class="container">
+      <p>This data has been adapted from a real warehouse. If you use it for a purpose other than Georgia Tech’s ISyE 6335 class, please include the following acknowledgement “This data courtesy of <a href="http://www.warehouse-science.com">warehouse-science.com</a>”.</p>
+
+<h1 id="a-wholesale-distributor">A wholesale distributor</h1>
+
+<p>The customers of this warehouse are retail stores. Most of them are relatively small and order much of their stock in piece quantities. The data below shows the resulting activity in the warehouse to pick pieces.</p>
+
+<h2 id="data">Data</h2>
+<p>This data is just as received from the client and so, like any data, has inconsistencies and omissions. Part of the challenge of a real project is to deal with these.</p>
+
+<h3 id="item-master-25kb"><a href="./SKUs.csv.zip">Item master</a> (25KB)</h3>
+
+<p>All distance measurements are in centimeters.</p>
+
+<ul>
+  <li>Do all SKUs have dimensional data? (Which do not?)</li>
+  <li>What are the shortest and longest dimensions of the unit of storage?</li>
+  <li>What are the lightest and heaviest pieces? Cases? (Why is this useful to know?)</li>
+  <li>What SKUs occupy the most volume? (Why is this useful to know?)</li>
+  <li>What SKUs are the most dense (weight / volume)? (Why is this useful to know?)</li>
+  <li>Do any SKUs have case height as their largest dimensions? (Why is this useful to know?)</li>
+</ul>
+
+<h3 id="picks-29mb"><a href="./picks.csv.zip">Picks</a> (29MB)</h3>
+
+<p>This is a history of piece-picks, not complete customer orders.</p>
+
+<p>The first several questions are checks to see how stable this data is, how useful it might be in predicting future warehouse activity.</p>
+<ul>
+  <li>What is the time span covered by this data?</li>
+  <li>Do all the SKUs from the Item Master appear here? (Which do not and why might this be so?)</li>
+  <li>Do all the SKUs here also appear in the Item Master? (Which do not?)</li>
+</ul>
+
+<p>The following questions seek to discover patterns of customer orders.</p>
+<ul>
+  <li>What are the most popular SKUs?</li>
+  <li>What SKUs are ordered in the greatest quantity?</li>
+  <li>What SKUs are ordered in the greatest physical volume?</li>
+  <li>What fraction of orders are for a single pick-line?</li>
+  <li>What is the average number of piece-picks per day? Per day of the week? What are the distributions?</li>
+  <li>What is the average number of pieces per pick? The distribution?</li>
+  <li>What were the pick rates of the workers?</li>
+  <li>Is there any evidence of significant seasonalities in numbers of orders or quantities ordered? Can you have confidence in any seasonalities?</li>
+  <li>Are there any significant product affinities?</li>
+</ul>
+
+<h2 id="design-a-forward-piece-pick-area">Design a forward piece-pick area</h2>
+
+<p>Up to now pieces have been picked together with cases. This created handling problems and so the decision has been made to create a separate process and area for piece-picking.</p>
+
+<h3 id="initial-design">Initial design</h3>
+<p>The initial design calls for 30 bays of flow rack along each side of a conveyor for a total of 60 bays. Each bay is 5 feet wide and 10 feet deep. Shelf heights can be chosen as necessary.</p>
+
+<p>There would be three work “stations” at equal intervals, with each station staffed by a pair of workers, one on each side of the conveyor. Each worker would be responsible for picking out of ten bays.</p>
+
+<p>Each order is assigned to one or more totes and each tote holds pieces for a single order. Totes flow in one direction through the flow rack. When a worker finishes picks from his zone to a tote, the tote will either be diverted across to the worker on the opposite side of the conveyor (the same work station) or else will be transported down to the next station. Product will be restocked from nearby pallet rack.</p>
+
+<h4 id="assumptions">Assumptions</h4>
+<p>Assume 120 picks per hour from flow rack and 60 picks per hour elsewhere. Assume about 15 restocks per hour.</p>
+
+<p>Use historical data as forecast for the near future.</p>
+
+<p>The piece-pick area will be installed on a mezzanine, from which a conveyor will take totes to the shipping dock. There is enough room to run two aisles of carton flow rack with 30 bays on each side, with conveyor and queueing stations in between. As shown in the figure below.</p>
+
+<figure class="figure">
+  <img src="layout.png" class="figure-img img-fluid rounded" alt="Proposed layout of the forward pick area" />
+  <figcaption class="figure-caption">Proposed layout of the forward-pick area</figcaption>
+</figure>
+
+<h4 id="questions">Questions</h4>
+<ul>
+  <li>Should there be a forward-pick area at all? What is the greatest labor savings possible?</li>
+  <li>Which SKUs should be stored in the flow rack? What is the total labor required to move the forecast orders? What fraction of orders can be completed within the forward-pick area? How many restocks are necessary to maintain the forward-pick area?</li>
+  <li>There is insufficient room for more than 60 bays of flow rack. Are all 60 necessary?</li>
+  <li>Critique this design. What problems does it create and how can they be ameliorated? What constraints does this design place on shipping?</li>
+  <li>Would it be better to reorganize the forward-pick area to use an alternative picking protocol such as bucket-brigades?</li>
+</ul>
+
+<h4 id="reminders">Reminders</h4>
+<p>In answering the questions above,
+	- How did you manage the SKUs with missing or inconsistent data? 
+	- Did your computations use the quantity requested or the actual quantity picked? (Explain which is appropriate.)
+	- In reporting your results remember to convert units to measures that are easily understandable, such as “picks per day” versus “picks in five months”</p>
+
+    </div>
+
+    <footer>
+	<div class="container">
+		<div class="well well-sm">
+  		<p class="text-muted">&copy; John J. Bartholdi III • Georgia Institute of Technology&nbsp;</p>
+		</div>
+	</div>
+</footer>
+	
+<!-- Bootstrap core JavaScript ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+  </body>
+
+</html>
